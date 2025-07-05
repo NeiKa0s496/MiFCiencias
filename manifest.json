@@ -1,8 +1,16 @@
 {
-  "name": "FCiencias x MisProfesores",
-  "description": "",
+  "manifest_version": 2,
+  "name": "MiFciencias",
   "version": "1.0",
-  "manifest_version": 1,
+  
+  "description": "",
+  
+  "icons": {
+    "16": "./logos/logofciencias16.png",
+    "48": "./logos/palas(48x48).png",
+    "96": "./logos/palas(96x96).png"
+  },
+  
   "content_scripts": [
     {
       "js": ["content.js"],
@@ -12,6 +20,7 @@
       ]
     }
   ],
+
   "background": {
     "scripts": ["background.js"]
   },
@@ -21,12 +30,8 @@
     "https://web.fciencias.unam.mx/*",
     "https://www.misprofesores.com/escuelas/Facultad-de-Ciencias-UNAM_2842"
   ],
-  "icons": {
-    "16": "./logos/logofciencias16.png",
-    "48": "./logos/logofciencias48.png",
-    "128": "./logos/logofciencias128.png"
-  },
+  
   "browser_action": {
-    "default_icon": "./logos/logofciencias48.png"
+    "default_icon": "./logos/palas(48x48).png"
   }
 }
