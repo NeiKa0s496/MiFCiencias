@@ -6,9 +6,9 @@
   "description": "",
   
   "icons": {
-    "16": "./logos/logofciencias16.png",
-    "48": "./logos/palas(48x48).png",
-    "96": "./logos/palas(96x96).png"
+    "16": "./icons/logofciencias16.png",
+    "48": "./icons/palas(48x48).png",
+    "96": "./icons/palas(96x96).png"
   },
   
   "content_scripts": [
