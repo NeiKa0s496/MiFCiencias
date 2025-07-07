@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   }
   console.log(firstNames, lastNames);
   // Busca información de los profesores en misprofesores.com
-  fetchProfessorsInfo(firstNames, lastNames, sender.tab.id);
+  fetchProfxsInfo(firstNames, lastNames, sender.tab.id);
 });
 
 // Función para obtener los apellidos de un nombre completo
@@ -113,7 +113,7 @@ function transformSpecialChars(strings) {
 }
 
 // Función principal que busca información de profesores en misprofesores.com
-function fetchProfessorsInfo(firstNames, lastNames, tabid) {
+function fetchProfxsInfo(firstNames, lastNames, tabid) {
   // Hace una petición a la página de profesores de la Facultad de Ciencias
   fetch("https://www.misprofesores.com/escuelas/Facultad-de-Ciencias-UNAM_2842")
     .then(function (response) {
@@ -165,7 +165,7 @@ function fetchProfessorsInfo(firstNames, lastNames, tabid) {
       }
       console.log(profInfo);
       // Envía la información encontrada de vuelta a la pestaña
-      chrome.tabs.sendMessage(tabid, { professors: profInfo });
+      chrome.tabs.sendMessage(tabid, { profxs: profInfo });
       // Inyecta el CSS de estilos
       chrome.tabs.insertCSS(null, { file: "./style.css" });
     })

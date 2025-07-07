@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-  --green: #4CAF50;
-  --yellow: #FFC107;
-  --red: #F44336;
-  --dark-gray: #2D3748;
-  --light-gray: #F7FAFC;
+  --green: #58de5c;
+  --yellow: #ffde07;
+  --red: #ff122a;
+  --dark-gray: #157281;
+  --light-gray: #eef4f8;
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
 }
 
 /* Estilo base */
-.professor-card {
-  font-family: 'Inter', sans-serif;
+.tarjeta {
+  font-family: 'Space Mono', monospace;
   width: 280px;
   margin: 12px 0;
   padding: 16px;
@@ -24,50 +24,51 @@
   background-color: white;
 }
 
-.professor-card:hover {
+.tarjeta:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Colores según calificación */
-.professor-card.green {
+.tarjeta.green {
   border-left: 4px solid var(--green);
 }
 
-.professor-card.yellow {
+.tarjeta.yellow {
   border-left: 4px solid var(--yellow);
 }
 
-.professor-card.red {
+.tarjeta.red {
   border-left: 4px solid var(--red);
 }
 
 /* Encabezado con nombre */
 .professor-name {
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
   margin-bottom: 8px;
   color: var(--dark-gray);
 }
 
 /* Detalles de calificación */
-.professor-rating {
+.professor-calif {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
 }
 
-.rating-value {
+.calif-value {
   font-weight: 700;
   margin-right: 8px;
   font-size: 1.2rem;
 }
 
-.green .rating-value { color: var(--green); }
-.yellow .rating-value { color: var(--yellow); }
-.red .rating-value { color: var(--red); }
+.green .calif-value { color: var(--green); }
+.yellow .calif-value { color: var(--yellow); }
+.red .calif-value { color: var(--red); }
 
-.rating-label {
+.calif-label {
   font-size: 0.9rem;
   color: #718096;
 }
@@ -86,7 +87,7 @@
   align-items: center;
   padding: 6px 12px;
   background-color: #EDF2F7;
-  color: #2D3748;
+  color: #13a2b5;
   text-decoration: none;
   border-radius: 4px;
   font-size: 0.85rem;
@@ -96,7 +97,7 @@
 
 .professor-link:hover {
   background-color: #E2E8F0;
-  color: #1A202C;
+  color: #1eb3a4;
 }
 
 .professor-link::after {
@@ -124,7 +125,7 @@
 }
 
 /* Efecto de tarjeta */
-.professor-card::before {
+.tarjeta::before {
   content: "";
   position: absolute;
   top: 0;
@@ -136,4 +137,3 @@
 .green::before { background: linear-gradient(90deg, var(--green), #A5D6A7); }
 .yellow::before { background: linear-gradient(90deg, var(--yellow), #FFE082); }
 .red::before { background: linear-gradient(90deg, var(--red), #EF9A9A); }
-
