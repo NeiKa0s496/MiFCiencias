@@ -5,7 +5,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   for (let j = 0; j < professors.length; j++) {
     if (professors[j] === null) {
       let error = document.createElement("div");
-      error.className = "failed";
+      error.className = "professor-not-found ";
       error.innerText = "No se encontró o(╥﹏╥)o";
       tables[j].after(error);
       continue;
@@ -13,17 +13,22 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     let info = document.createElement("div");
     let cal = parseInt(professors[j].c);
     if (cal >= 8) {
-      info.className = "info green";
+      info.className = "professor-card green";
     } else if (cal >= 6) {
-      info.className = "info yellow";
+      info.className = "professor-card  yellow";
     } else {
-      info.className = "info red";
+      info.className = "professor-card  red";
     }
     let name = document.createElement("div");
     name.className = "name";
     name.innerText = professors[j].n + " " + professors[j].a;
+    
     let grade = document.createElement("div");
-    grade.innerText = "calificación del prof: " + professors[j].c;
+    grade.innerText = "calificación: " + parseFloat(professors[j].c).toFixed(2);
+    const rating = parseFloat(professors[j].c);
+    grade.innerText = "calificación: " + (rating % 1 === 0 ? rating.toFixed(0) : rating.toFixed(1));
+    
+    
     let comments = document.createElement("div");
     comments.innerText = "comentarios: " + professors[j].m;
     let bottom = document.createElement("div");
