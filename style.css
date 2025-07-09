@@ -2,14 +2,86 @@
 
 :root {
   --green: #58de5c;
-  --yellow: #ffde07;
+  --yellow: #f0bc1f;
   --red: #ff122a;
   --dark-gray: #157281;
   --light-gray: #eef4f8;
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --transition: all 0.3s ease;
 }
+/*Sección del horario*/
 
+.add-to-schedule {
+  margin-left: 10px;
+  padding: 6px 12px;
+  background-color: var(--dark-gray);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+
+.add-to-schedule:hover {
+  background-color: #0d5c6b;
+}
+
+.add-to-schedule:disabled {
+  background-color: #cccccc;
+  cursor: default;
+}
+
+.schedule-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Space Mono', monospace;
+}
+
+.schedule-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin: 8px 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.schedule-item .grade {
+  font-weight: bold;
+  color: var(--dark-gray);
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--red);
+  font-size: 1.2rem;
+}
+
+#print-schedule {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background: var(--dark-gray);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+}
+
+@media print {
+  button {
+    display: none;
+  }
+}
 /* Estilo base */
 .tarjeta {
   font-family: 'Space Mono', monospace;
@@ -98,12 +170,6 @@
 .professor-link:hover {
   background-color: #E2E8F0;
   color: #1eb3a4;
-}
-
-.professor-link::after {
-  content: "→";
-  margin-left: 6px;
-  font-weight: bold;
 }
 
 /* Estado cuando no se encuentra el profesor */

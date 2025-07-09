@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mi Horario - MiFciencias</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      width: 400px;
+      padding: 15px;
+      font-family: 'Space Mono', monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="schedule-container">
+    <h1>Mi Horario FCienicas</h1>
+    <div id="schedule-list"></div>
+    <button id="print-schedule">Imprimir Horario</button>
+  </div>
+  <script src="schedule.js"></script>
+  <script>
+    // Espera a que ScheduleManager esté disponible
+    function checkScheduleManager() {
+      if (window.ScheduleManager) {
+        document.addEventListener('DOMContentLoaded', function() {
+          const script = document.createElement('script');
+          script.src = chrome.runtime.getURL('schedule-ui.js');
+          document.head.appendChild(script);
+        });
+      } else {
+        setTimeout(checkScheduleManager, 100);
+      }
+    }
+    checkScheduleManager();
+  </script>
+</body>
+</html>

@@ -2,15 +2,22 @@
   "manifest_version": 2,
   "name": "MiFciencias",
   "version": "1.0",
-  
-  "description": "",
-  
+  "description": "Extensión para ver calificaciones de profesores y crear horarios",
   "icons": {
-    "16": "./icons/logofciencias16.png",
-    "48": "./icons/palas(48x48).png",
-    "96": "./icons/palas(96x96).png"
+    "16": "icons/palas(16x16).png",
+    "48": "icons/palas(48x48).png",
+    "96": "icons/palas(96x96).png"
   },
   
+  "web_accessible_resources": [
+  "schedule.html",
+  "schedule.js",
+  "schedule-ui.js",
+  "style.css",
+  "content.js",
+  "foreground.js"
+],
+
   "content_scripts": [
     {
       "js": ["content.js"],
@@ -20,18 +27,20 @@
       ]
     }
   ],
-
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "permissions": [
     "tabs",
+    "storage",
     "http://www.fciencias.unam.mx/*",
     "https://web.fciencias.unam.mx/*",
-    "https://www.misprofesores.com/escuelas/Facultad-de-Ciencias-UNAM_2842"
+    "https://www.misprofesores.com/*"
   ],
-  
   "browser_action": {
-    "default_icon": "./logos/palas(48x48).png"
+    "default_icon": "icons/palas(48x48).png",
+    "default_title": "MiFciencias",
+    "default_popup": "schedule.html"
   }
 }
