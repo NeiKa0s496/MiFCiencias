@@ -1,4 +1,4 @@
-// Get profxs info and send it to background
+// Obtiene la info de los profxs 
 let tables = document.getElementsByTagName('table');
 let profxs = [];
 for (let i = 0; i < tables.length; i++) {

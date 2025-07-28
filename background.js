@@ -1,6 +1,6 @@
 // Escucha cuando una pestaña se actualiza
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  // Verifica si el estado es 'loading' (la pestaña está cargando)
+  // Verifica si la pestaña está cargando
   if (changeInfo.status === "loading") {
     // Comprueba si la URL coincide con el patrón de horarios de la Facultad
     if (
@@ -14,10 +14,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   }
 });
 
-// Escucha mensajes desde otros scripts (como foreground.js)
+// Escucha mensajes desde otros scripts 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   console.log(sender);
-  // Inicializa arrays para nombres y apellidos
+  // Inicializa arreglos para nombres y apellidos
   firstNames = [];
   lastNames = [];
 
@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // Función para obtener los apellidos de un nombre completo
 function getLastName(name) {
   let arr = name.split(" ").splice(-2); // Toma los últimos dos elementos
-  let lastName = arr[0] + " " + arr[1]; // Une los dos últimos elementos (apellidos)
+  let lastName = arr[0] + " " + arr[1]; // Une los dos últimos apellidos
   return lastName;
 }
 
@@ -133,7 +133,7 @@ function fetchProfxsInfo(firstNames, lastNames, tabid) {
       profInfo = [];
       // Para cada profesor, busca coincidencias en el HTML
       for (i = 0; i < firstUnicode.length; i++) {
-        // Construye un regex complejo para encontrar el profesor
+        // Construye regex para encontrar el profesor
         let regExString =
           "\\{[^}]*(" +
           firstUnicode[i] +

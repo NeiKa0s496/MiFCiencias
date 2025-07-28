@@ -1,4 +1,3 @@
-
 // Escucha mensajes del runtime (background.js)
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   let tables = document.getElementsByTagName("table");
@@ -35,10 +34,22 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       <span class="calif-label">calificación</span>
     `;
     
-    let comments = document.createElement("div");
+    // Sección corregida para mostrar comentarios
+    let comments = document.createElement('div');
     comments.className = "professor-comments";
-    const commentCount = profxs[j].m ? profxs[j].m.length : 0;
-    comments.innerHTML = `<span class="comment-count">Comentarios: ${commentCount}</span>`;
+    
+    // Verificamos si hay comentarios y mostramos el número correctamente
+    if (profxs[j].m && typeof profxs[j].m === 'object') {
+      // Si es un objeto, contamos las claves
+      const commentCount = Object.keys(profxs[j].m).length;
+      comments.innerHTML = `<span class="comment-count">Comentarios: ${commentCount}</span>`;
+    } else if (profxs[j].m) {
+      // Si no es un objeto pero tiene valor, lo mostramos directamente
+      comments.innerHTML = `<span class="comment-count">Comentarios: ${profxs[j].m}</span>`;
+    } else {
+      // Si no hay comentarios
+      comments.innerHTML = '<span class="comment-count">Sin comentarios</span>';
+    }
     
     let bottom = document.createElement("div");
     bottom.className = "bottom";
@@ -49,19 +60,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     ir.href = getProfURL(profxs[j].n, profxs[j].a, profxs[j].i);
     ir.target = "_blank";
     
-    let addButton = document.createElement("button");
-    addButton.className = "add-to-schedule";
-    addButton.innerHTML = "➕ Agregar a horario";
-    addButton.dataset.profId = profxs[j].i;
-    addButton.onclick = () => {
-      if (window.ScheduleManager.addToSchedule(profxs[j])) {
-        addButton.innerHTML = "✔️ En horario";
-        addButton.disabled = true;
-      }
-    };
-    
     bottom.appendChild(ir);
-    bottom.appendChild(addButton);
     
     info.appendChild(name);
     info.appendChild(grade);
@@ -70,27 +69,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     
     tables[j].after(info);
   }
-  
-  // Verificar horario después de crear todas las tarjetas
-  checkScheduleStatus();
 });
 
-function checkScheduleStatus() {
-  if (window.ScheduleManager) {
-    window.ScheduleManager.loadSchedule(() => {
-      document.querySelectorAll('.add-to-schedule').forEach(button => {
-        const professorId = button.dataset.profId;
-        if (window.ScheduleManager.getSchedule().some(p => p.i === professorId)) {
-          button.innerHTML = '✔️ En horario';
-          button.disabled = true;
-        }
-      });
-    });
-  } else {
-    // Reintentar si ScheduleManager no está cargado
-    setTimeout(checkScheduleStatus, 100);
-  }
-}
 // Función para generar URL del perfil del profesor en misprofesores.com
 function getProfURL(firstName, lastName, id) {
   // Normaliza los nombres (quita acentos)
@@ -116,19 +96,3 @@ function removeSpecialChars(name) {
     .normalize(); // Vuelve a forma compuesta
   return removed;
 }
-function initScheduleUI() {
-  ScheduleManager.loadSchedule(() => {
-    document.querySelectorAll('.add-to-schedule').forEach(button => {
-      const professorId = button.dataset.profId;
-      if (ScheduleManager.getSchedule().some(p => p.i === professorId)) {
-        button.innerText = '✔️ En horario';
-        button.disabled = true;
-      }
-    });
-  });
-}
-
-// Cargar schedule.js primero
-const scheduleScript = document.createElement('script');
-scheduleScript.src = chrome.runtime.getURL('schedule.js');
-document.head.appendChild(scheduleScript);
